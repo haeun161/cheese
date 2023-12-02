@@ -1,5 +1,20 @@
-FROM jenkins/jenkins:lts-jdk17
-USER root
-RUN apt-get -y update && \
-        apt-get -y install build-essential wget sudo apt-utils && wget -qO- https://get.docker.com/ | sh && usermod -aG docker jenkins && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-sdk -y
-USER jenkins
+# Use the official Node.js 14 image
+FROM node:14
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the application code to the working directory
+COPY . /app
+
+# Expose the port that the application will run on
+EXPOSE 80
+
+# Command to run the application
+CMD ["node", "main.js"]
