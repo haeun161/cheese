@@ -34,8 +34,8 @@ pipeline {
 				branch 'main'
 			}
             steps{
-                sh "sed -i 's/minju0907/cheese:latest/minju0907/cheese:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID,verifyDeployments: true ])
+                sh "sed -i 's/cheese:latest/cheese:${env.BUILD_ID}/g' deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID,verifyDeployments: true])
             }
         }
     }    
