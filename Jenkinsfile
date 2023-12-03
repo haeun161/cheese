@@ -22,7 +22,7 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'cheese') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'minju0907') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
