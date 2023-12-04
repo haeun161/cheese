@@ -4,7 +4,7 @@ pipeline {
         PROJECT_ID = 'open-398711'
         CLUSTER_NAME = 'kube'
         LOCATION = 'asia-northeast3-a'
-        CREDENTIALS_ID = 'gke'
+        CREDENTIALS_ID = '3c900be2-3205-4974-8660-f44e49932198'
     }
     stages {
         stage("Checkout code") {
