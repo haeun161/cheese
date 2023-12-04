@@ -157,29 +157,33 @@ exports.sendSMS = async function (req, res) {
             return baseResponse.SMS_SEND_FAILURE;
         }
     }
-        // 메일을 보낼 시간에 대한 처리
-        mediSMSResult.forEach((row) => {
-          const time = row.medi_reminder_time; // medi_reminder_time 값
-          const phoneNumber = row.gd_phone; // gd_phone 값
-          const name = row.patient_name;
-  
-          // 현재 시간과 medi_reminder_time 값을 비교하여 SMS를 보낼 시간이라면 sendSMS 함수 호출
-          //const currentTime = new Date();
-          const currentTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
-          const currentTimeObj = new Date(currentTime);
-          const currentHours = currentTimeObj.getHours();
-          const currentMinutes = currentTimeObj.getMinutes();
-          const reminderTime = new Date(currentTimeObj.getFullYear(), currentTimeObj.getMonth(), currentTimeObj.getDate(), time.split(':')[0], time.split(':')[1]);
+      // 예상되는 mediSMSResult의 형태를 확인하고 필요에 따라 데이터 추출
+  const dataArray = Object.values(mediSMSResult);
 
-          if (currentHours === reminderTime.getHours() && currentMinutes === reminderTime.getMinutes()) {
-            // sendSMS 함수 호출 등 필요한 로직 처리
-            sendSMS(phoneNumber, name);
-            console.log("sms전송 완료");
-          }
-          
-        });
-};
+  // dataArray가 배열인지 확인 후 forEach 사용
+  if (Array.isArray(dataArray)) {
+    dataArray.forEach((row) => {
+      const time = row.medi_reminder_time;
+      const phoneNumber = row.gd_phone;
+      const name = row.patient_name;
 
+      // 나머지 로직은 그대로 유지
+      const currentTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+      const currentTimeObj = new Date(currentTime);
+      const currentHours = currentTimeObj.getHours();
+      const currentMinutes = currentTimeObj.getMinutes();
+      const reminderTime = new Date(currentTimeObj.getFullYear(), currentTimeObj.getMonth(), currentTimeObj.getDate(), time.split(':')[0], time.split(':')[1]);
+
+      if (currentHours === reminderTime.getHours() && currentMinutes === reminderTime.getMinutes()) {
+        sendSMS(phoneNumber, name);
+        console.log("sms전송 완료");
+      }
+    });
+  } else {
+    console.error('mediSMSResult is not an array.');
+  }
+}
+      
 // 병원 일정 알림 get
 /*
 exports.getHospital = async function (req, res) {
