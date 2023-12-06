@@ -1,6 +1,6 @@
 const reminderService = require('../services/reminderService');
 const jwt = require('jsonwebtoken');
-const secret = require('../config/secret');
+//const secret = require('../config/secret');
 const baseResponse = require("../config/baseResponseStatus");
 const path = require('path');
 const axios = require('axios');
@@ -9,7 +9,7 @@ const crypto = require('crypto');
 
 exports.postMedi = async function (req, res) {
     const token = req.cookies.x_auth;
-    const decodedToken = jwt.verify(token, secret.jwtsecret); // 토큰 검증, 복호화 
+    const decodedToken = jwt.verify(token, process.env.jwtsecret); // 토큰 검증, 복호화 
     const user_id = decodedToken.user_id; // user_id를 추출
     if (token) {
         const {
@@ -45,7 +45,7 @@ exports.postMedi = async function (req, res) {
 
 exports.deleteMedi = async function (req, res) {
     const token = req.cookies.x_auth;
-    const decodedToken = jwt.verify(token, secret.jwtsecret); // 토큰 검증, 복호화 
+    const decodedToken = jwt.verify(token, process.env.jwtsecret); // 토큰 검증, 복호화 
     const user_id = decodedToken.user_id; // user_id를 추출
     if (token) {
         const MediResponse = await reminderService.deleteMediReminder(
@@ -78,7 +78,7 @@ exports.deleteMedi = async function (req, res) {
 exports.getMedi = async function (req,res) {
     const token = req.cookies.x_auth;
     if (token) {
-        const decodedToken = jwt.verify(token, secret.jwtsecret); // 토큰 검증, 복호화
+        const decodedToken = jwt.verify(token, process.env.jwtsecret); // 토큰 검증, 복호화
         const user_id = decodedToken.user_id; // user_id를 추출
         
         // validation
@@ -189,7 +189,7 @@ exports.sendSMS = async function (req, res) {
 exports.getHospital = async function (req, res) {
     const token = req.cookies.x_auth;
     if (token) {
-        const decodedToken = jwt.verify(token, secret.jwtsecret); // 토큰 검증, 복호화
+        const decodedToken = jwt.verify(token, process.env.jwtsecret); // 토큰 검증, 복호화
         const user_id = decodedToken.user_id; // user_id를 추출
         
         // validation
