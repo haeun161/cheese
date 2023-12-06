@@ -20,6 +20,9 @@ spec:
       containers:
       - name: cheese
         image: minju0907/cheese:latest
+        envFrom:
+        - secretRef:
+            name: cheese-secret
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -39,3 +42,11 @@ spec:
     app: cheese
     tier: cheese
   type: LoadBalancer
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jwt-secret
+stringData:
+      jwtsecret : cheese_jwt_secret_key_123456789!
+
