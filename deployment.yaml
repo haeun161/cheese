@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: cheese
-        image: minju0907/cheese:latest
+        image: haeun161/cheese:latest
         # env:
         # - configMapRef:
         #     name: jwtsecret
