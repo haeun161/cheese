@@ -22,7 +22,8 @@ spec:
         image: minju0907/cheese:latest
         envFrom:
         - secretRef:
-            name: cheese-secret
+            name: jwt-secret
+            key: jwtsecret
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
