@@ -1,20 +1,10 @@
-# Use the official Node.js 14 image
-FROM node:14
 
-# Set the working directory in the container
+FROM node:18.16.0
+RUN apt-get update && apt-get -y install build-essential && mkdir –p /app
+COPY package*.json /app
 WORKDIR /app
-
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the application code to the working directory
+COPY main.js /app
 COPY . /app
-
-# Expose the port that the application will run on
-EXPOSE 80
-
-# Command to run the application
-CMD ["node", "main.js"]
+EXPOSE 5000
+CMD [ "node", "main.js" ] 
