@@ -20,22 +20,10 @@ spec:
       containers:
       - name: cheese
         image: minju0907/cheese:latest
-        # env:
-        # - configMapRef:
-        #     name: jwtsecret
-        # - secretRef:
-        #     name: jwtsecret
-        env:
-        - name: CONFIGMAP_ENV_VAR_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: jwtsecret
-              key: key-in-configmap
-        - name: SECRET_ENV_VAR_NAME
-          valueFrom:
-            secretKeyRef:
-              name: jwtsecret
-              key: key-in-secret
+        envFrom:
+        - secretRef:
+            name: jwt-secret
+            key: jwtsecret
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -55,11 +43,10 @@ spec:
     app: cheese
     tier: cheese
   type: LoadBalancer
-
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: my-secret
+  name: jwt-secret
 stringData:
-  jwtsecret : cheese_jwt_secret_key_123456789!
+      jwtsecret : cheese_jwt_secret_key_123456789!
