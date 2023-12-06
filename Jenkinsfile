@@ -1,10 +1,10 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID = 'open-398711'
+        PROJECT_ID = 'open-405306'
         CLUSTER_NAME = 'kube'
         LOCATION = 'asia-northeast3-a'
-        CREDENTIALS_ID = '3c900be2-3205-4974-8660-f44e49932198'
+        CREDENTIALS_ID = '6a7009c7-b9d4-450f-a15a-ebcdb601c467'
     }
     stages {
         stage("Checkout code") {
@@ -15,14 +15,14 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("minju0907/cheese:${env.BUILD_ID}")
+                    myapp = docker.build("haeun161/cheese:${env.BUILD_ID}")
                 }
             }
         }
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'minju0907') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'haeun161') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
