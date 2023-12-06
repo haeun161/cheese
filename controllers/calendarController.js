@@ -59,7 +59,7 @@ exports.getCalendar = async function (req, res) {
 exports.postCalendar = async function (req, res) {
   const token = req.cookies.x_auth;
   if (token) {
-      const decodedToken = jwt.verify(token, secret.jwtsecret); // 토큰 검증, 복호화
+      const decodedToken = jwt.verify(token,process.env.jwtsecret); // 토큰 검증, 복호화
       const user_id = decodedToken.user_id; // user_id를 추출
       console.log(req.body);
       const date = req.query.selectedYear + req.query.selectedMonth + req.query.selectedDate;
@@ -123,7 +123,7 @@ exports.postCalendar = async function (req, res) {
 exports.postFile = async function (req, res) {  
   const token = req.cookies.x_auth; 
   if (token) {
-    const decodedToken = jwt.verify(token, secret.jwtsecret); // 토큰 검증, 복호화
+    const decodedToken = jwt.verify(token,process.env.jwtsecret); // 토큰 검증, 복호화
     const user_id = decodedToken.user_id; // user_id를 추출
     
     const date = req.body.fileDate;
