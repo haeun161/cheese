@@ -50,4 +50,3 @@ metadata:
   name: jwt-secret
 stringData:
       jwtsecret : cheese_jwt_secret_key_123456789!
-
