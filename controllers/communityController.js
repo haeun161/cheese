@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const baseResponse = require("../config/baseResponseStatus");
 const path = require('path');
 const querystring = require('querystring');
+require('dotenv').config();
 
 //게시글 세부 조회 + 댓글 조회
 exports.getCommunity = async function (req, res) {

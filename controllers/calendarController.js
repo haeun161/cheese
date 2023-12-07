@@ -2,12 +2,17 @@ const calendarService = require('../services/calendarService');
 const path = require('path');
 const calendarDate = require('../public/js/calendar.js');
 const jwt = require('jsonwebtoken');
-const secret = require('app/config/secret');
+require('dotenv').config();
 const querystring = require('querystring');
 const baseResponse = require("../config/baseResponseStatus");
 
+
+
 //캘린더 조회
 exports.getCalendar = async function (req, res) {
+
+  const jwtSecret = process.env.jwtsecret;
+  console.log(jwtSecret)
   const token = req.cookies.x_auth;
   if (token) {
     const decodedToken = jwt.verify(token, process.env.jwtsecret);
@@ -121,7 +126,7 @@ exports.postCalendar = async function (req, res) {
 exports.postFile = async function (req, res) {  
   const token = req.cookies.x_auth; 
   if (token) {
-    const decodedToken = jwt.verify(token, verify(token, process.env.jwtsecret);
+    const decodedToken = jwt.verify(token, process.env.jwtsecret);
     const user_id = decodedToken.user_id; // user_id를 추출
     
     const date = req.body.fileDate;

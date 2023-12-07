@@ -6,6 +6,7 @@ const path = require('path');
 const axios = require('axios');
 const Cache = require('memory-cache');
 const crypto = require('crypto');
+require('dotenv').config();
 
 exports.postMedi = async function (req, res) {
     const token = req.cookies.x_auth;
