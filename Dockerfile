@@ -1,5 +1,5 @@
 
-FROM node:18.16.0
+FROM node:18.12.1
 RUN apt-get update && apt-get -y install build-essential && mkdir –p /app
 COPY package*.json /app
 WORKDIR /app
