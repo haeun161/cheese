@@ -71,6 +71,13 @@ spec:
             secretKeyRef:
               name: cheese-secrets
               key: jwtsecret
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key:  OPENAI_API_KEY
+
+
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -105,4 +112,5 @@ data:
   SENS_SECRET_KEY: WE1Vb2hVZHpMbGVKeDEwR1QwRkFiSFY0b01FY2ZvMzBiU2RWSVBBWQ==
   SENS_ACCESS_KEY: YXZIU3VIa21ya1FEYVNsZDNHVE9GAFBTbGRuM0dVQg==
   SENS_MYPHONENUM: MDEwNjMwMDc3NTM=
-  jwtsecret : Y2hlZXNlX2p3dF9zZWNyZXRfa2V5XzEyMzQ1Njc4OSE=
+  jwtsecret: Y2hlZXNlX2p3dF9zZWNyZXRfa2V5XzEyMzQ1Njc4OSE=
+  OPENAI_API_KEY: c2stSlFQWnBqaFUwYjlaQlI1TUFhWTdUM0JsYmtGSlJ5azR3ckFlRUpLVk9nMUhoaGpG
