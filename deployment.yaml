@@ -20,22 +20,6 @@ spec:
       containers:
       - name: cheese
         image: haeun161/cheese:latest
-        # env:
-        # - configMapRef:
-        #     name: jwtsecret
-        # - secretRef:
-        #     name: jwtsecret
-        env:
-        - name: CONFIGMAP_ENV_VAR_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: jwtsecret
-              key: key-in-configmap
-        - name: SECRET_ENV_VAR_NAME
-          valueFrom:
-            secretKeyRef:
-              name: jwtsecret
-              key: key-in-secret
         envFrom:
         - secretRef:
             name: jwt-secret
