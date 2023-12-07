@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "node main.js && exit 1",
-    "start" : "node main.js"
+    "start": "node main.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@kubernetes/client-node": "^0.20.0",
     "axios": "^1.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

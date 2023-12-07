@@ -5,6 +5,7 @@ const axios = require('axios');
 const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config();
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

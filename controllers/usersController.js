@@ -1,5 +1,6 @@
 const usersService = require('../services/usersService');
 const jwtMiddleware = require('../middlewares/jwtMiddleware');
+require('dotenv').config();
 
 // 회원가입
 exports.postUsers = async function (req,res) {

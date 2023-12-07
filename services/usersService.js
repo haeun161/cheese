@@ -3,7 +3,8 @@ const pool = require('../main');
 const usersModel = require('../models/usersModel');
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const secret = require('../config/secret');
+//const secret = require('../config/secret');
+require('dotenv').config();
 const baseResponse = require("../config/baseResponseStatus");
 
 // 회원가입
@@ -113,7 +114,7 @@ exports.createUser = async function (
           user_id: user_id,
           user_name: userInfoRows[0].user_name,
         }, // 토큰의 내용(payload)
-        secret.jwtsecret, // 비밀키
+        process.env.jwtsecret, // 비밀키
         {
           expiresIn: "7d",
           subject: "user",
