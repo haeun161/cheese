@@ -20,10 +20,12 @@ spec:
       containers:
       - name: cheese
         image: haeun161/cheese:latest
-        envFrom:
-        - secretRef:
-            name: jwt-secret
-            key: jwtsecret
+        env:
+        - name: jwtsecret # 환경 변수의 이름
+          valueFrom:
+            secretKeyRef:
+              name: jwt-secret
+              key: jwtsecret
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
