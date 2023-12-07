@@ -103,9 +103,9 @@ kind: Secret
 metadata:
   name: cheese-secrets
 data:
-  DB_HOST: MzQuMjIuODMuNjY=
+  DB_HOST: MzQuNjQuMTczLjE4OQ== #MzQuMjIuODMuNjY= 
   DB_USER: Y2hlZXNl
-  DB_PW: Y2hlZXNlMTIzNDUh
+  DB_PW: Y2hlZXNlMTIzNCE=
   DB_PORT: MzMwNg==
   DB_NAME: Y2hlZXNlX2Ri
   SENS_SERVICE_ID: bmNwOnNtczprcjozMDYxNzUyNTE4NjA6Y2hlZXNl
