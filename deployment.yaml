@@ -21,10 +21,55 @@ spec:
       - name: cheese
         image: haeun161/cheese:latest
         env:
-        - name: jwtsecret # 환경 변수의 이름
+        - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: jwt-secret
+              name: cheese-secrets
+              key: DB_HOST
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: DB_USER
+        - name: DB_PW
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: DB_PW
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: DB_NAME
+        - name: SENS_SERVICE_ID
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: SENS_SERVICE_ID
+        - name: SENS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: SENS_SECRET_KEY
+        - name: SENS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: SENS_ACCESS_KEY
+        - name: SENS_MYPHONENUM
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
+              key: SENS_MYPHONENUM
+        - name: jwtsecret
+          valueFrom:
+            secretKeyRef:
+              name: cheese-secrets
               key: jwtsecret
         imagePullPolicy: Always
         ports:
@@ -49,6 +94,15 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: jwt-secret
-data: #key:value로 지정
+  name: cheese-secrets
+data:
+  DB_HOST: MzQuMjIuODMuNjY=
+  DB_USER: Y2hlZXNl
+  DB_PW: Y2hlZXNlMTIzNDUh
+  DB_PORT: MzMwNg==
+  DB_NAME: Y2hlZXNlX2Ri
+  SENS_SERVICE_ID: bmNwOnNtczprcjozMDYxNzUyNTE4NjA6Y2hlZXNl
+  SENS_SECRET_KEY: WE1Vb2hVZHpMbGVKeDEwR1QwRkFiSFY0b01FY2ZvMzBiU2RWSVBBWQ==
+  SENS_ACCESS_KEY: YXZIU3VIa21ya1FEYVNsZDNHVE9GAFBTbGRuM0dVQg==
+  SENS_MYPHONENUM: MDEwNjMwMDc3NTM=
   jwtsecret : Y2hlZXNlX2p3dF9zZWNyZXRfa2V5XzEyMzQ1Njc4OSE=
