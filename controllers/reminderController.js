@@ -158,20 +158,16 @@ exports.sendSMS = async function (req, res) {
             return baseResponse.SMS_SEND_FAILURE;
         }
     }
-      // 예상되는 mediSMSResult의 형태를 확인하고 필요에 따라 데이터 추출
-  const dataArray = Object.values(mediSMSResult);
-
-  // dataArray가 배열인지 확인 후 forEach 사용
-  if (Array.isArray(dataArray)) {
-    dataArray.forEach((row) => {
-      const time = row.medi_reminder_time;
-
-      // Check if medi_reminder_time is defined before using it
-      if (time) {
-        const phoneNumber = row.gd_phone;
+    if (Array.isArray(mediSMSResult)) {
+      
+      // 메일을 보낼 시간에 대한 처리      
+      mediSMSResult.forEach((row) => {
+        const time = row.medi_reminder_time; // medi_reminder_time 값
+        const phoneNumber = row.gd_phone; // gd_phone 값
         const name = row.patient_name;
 
-        // 나머지 로직은 그대로 유지
+        // 현재 시간과 medi_reminder_time 값을 비교하여 SMS를 보낼 시간이라면 sendSMS 함수 호출
+        //const currentTime = new Date();
         const currentTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
         const currentTimeObj = new Date(currentTime);
         const currentHours = currentTimeObj.getHours();
@@ -179,61 +175,12 @@ exports.sendSMS = async function (req, res) {
         const reminderTime = new Date(currentTimeObj.getFullYear(), currentTimeObj.getMonth(), currentTimeObj.getDate(), time.split(':')[0], time.split(':')[1]);
 
         if (currentHours === reminderTime.getHours() && currentMinutes === reminderTime.getMinutes()) {
+          // sendSMS 함수 호출 등 필요한 로직 처리
           sendSMS(phoneNumber, name);
           console.log("sms전송 완료");
         }
-      } else {
-        console.error('medi_reminder_time is not defined in the row object.');
-        }
-      });
-    } else {
-      console.error('mediSMSResult is not an array.');
-    } 
-}
-  /*
-    if (Array.isArray(dataArray)) {
-      dataArray.forEach((row) => {
-        const time = row.medi_reminder_time;
-        const phoneNumber = row.gd_phone;
-        const name = row.patient_name;
-
-        // 나머지 로직은 그대로 유지
-        const currentTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
-        const currentTimeObj = new Date(currentTime);
-        const currentHours = currentTimeObj.getHours();
-        const currentMinutes = currentTimeObj.getMinutes();
-        const reminderTime = new Date(currentTimeObj.getFullYear(), currentTimeObj.getMonth(), currentTimeObj.getDate(), time.split(':')[0], time.split(':')[1]);
-
-        if (currentHours === reminderTime.getHours() && currentMinutes === reminderTime.getMinutes()) {
-          sendSMS(phoneNumber, name);
-          console.log("sms전송 완료");
-        }
-      });
-    } else {
-      console.error('mediSMSResult is not an array.');
-  }
-}
- */     
-// 병원 일정 알림 get
-/*
-exports.getHospital = async function (req, res) {
-    const token = req.cookies.x_auth;
-    if (token) {
-        const decodedToken = jwt.verify(token, process.env.jwtsecret); // 토큰 검증, 복호화
-        const user_id = decodedToken.user_id; // user_id를 추출
         
-        // validation
-        if(!user_id) {
-            return res.send(errResponse(baseResponse.USER_USERIDX_EMPTY));
-        } 
-        if (user_id <= 0) {
-            return res.send(errResponse(baseResponse.USER_USERIDX_LENGTH));
-        }
-
-        // service 호출
-        const hospitalResult = await reminderService.retrieveHospital(user_id);
-        console.log(hospitalResult);
-        return res.render('reminder/reminder.ejs', { hospitalResult : hospitalResult});
-    }
-}
-*/
+      });
+    } 
+       
+};
