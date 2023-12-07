@@ -165,26 +165,55 @@ exports.sendSMS = async function (req, res) {
   if (Array.isArray(dataArray)) {
     dataArray.forEach((row) => {
       const time = row.medi_reminder_time;
-      const phoneNumber = row.gd_phone;
-      const name = row.patient_name;
 
-      // 나머지 로직은 그대로 유지
-      const currentTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
-      const currentTimeObj = new Date(currentTime);
-      const currentHours = currentTimeObj.getHours();
-      const currentMinutes = currentTimeObj.getMinutes();
-      const reminderTime = new Date(currentTimeObj.getFullYear(), currentTimeObj.getMonth(), currentTimeObj.getDate(), time.split(':')[0], time.split(':')[1]);
+      // Check if medi_reminder_time is defined before using it
+      if (time) {
+        const phoneNumber = row.gd_phone;
+        const name = row.patient_name;
 
-      if (currentHours === reminderTime.getHours() && currentMinutes === reminderTime.getMinutes()) {
-        sendSMS(phoneNumber, name);
-        console.log("sms전송 완료");
-      }
-    });
-  } else {
-    console.error('mediSMSResult is not an array.');
+        // 나머지 로직은 그대로 유지
+        const currentTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+        const currentTimeObj = new Date(currentTime);
+        const currentHours = currentTimeObj.getHours();
+        const currentMinutes = currentTimeObj.getMinutes();
+        const reminderTime = new Date(currentTimeObj.getFullYear(), currentTimeObj.getMonth(), currentTimeObj.getDate(), time.split(':')[0], time.split(':')[1]);
+
+        if (currentHours === reminderTime.getHours() && currentMinutes === reminderTime.getMinutes()) {
+          sendSMS(phoneNumber, name);
+          console.log("sms전송 완료");
+        }
+      } else {
+        console.error('medi_reminder_time is not defined in the row object.');
+        }
+      });
+    } else {
+      console.error('mediSMSResult is not an array.');
+    } 
+}
+  /*
+    if (Array.isArray(dataArray)) {
+      dataArray.forEach((row) => {
+        const time = row.medi_reminder_time;
+        const phoneNumber = row.gd_phone;
+        const name = row.patient_name;
+
+        // 나머지 로직은 그대로 유지
+        const currentTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+        const currentTimeObj = new Date(currentTime);
+        const currentHours = currentTimeObj.getHours();
+        const currentMinutes = currentTimeObj.getMinutes();
+        const reminderTime = new Date(currentTimeObj.getFullYear(), currentTimeObj.getMonth(), currentTimeObj.getDate(), time.split(':')[0], time.split(':')[1]);
+
+        if (currentHours === reminderTime.getHours() && currentMinutes === reminderTime.getMinutes()) {
+          sendSMS(phoneNumber, name);
+          console.log("sms전송 완료");
+        }
+      });
+    } else {
+      console.error('mediSMSResult is not an array.');
   }
 }
-      
+ */     
 // 병원 일정 알림 get
 /*
 exports.getHospital = async function (req, res) {
