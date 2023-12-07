@@ -49,4 +49,4 @@ kind: Secret
 metadata:
   name: jwt-secret
 data: #key:value로 지정
-  jwtsecret : cheese_jwt_secret_key_123456789!
+  jwtsecret : Y2hlZXNlX2p3dF9zZWNyZXRfa2V5XzEyMzQ1Njc4OSE=
