@@ -1,14 +1,16 @@
-apiVersion: v1 
-kind: Service 
-metadata: 
-  name: cheese 
-  labels: 
-    app : cheese  
-spec: 
-  ports: 
-  - port: 80 
-    targetPort: 5000 
-  selector: 
-    app : cheese 
-    tier: cheese 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cheese
+  labels:
+    app: cheese
+spec:
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: cheese
+    tier: cheese
   type: LoadBalancer
+
