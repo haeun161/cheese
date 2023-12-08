@@ -20,7 +20,7 @@ spec:
       containers:
       - name: cheese
         image: haeun161/cheese:latest
-        env:
+        envFrom:
         - secretRef:
             name: cheese-secrets
         imagePullPolicy: Always
