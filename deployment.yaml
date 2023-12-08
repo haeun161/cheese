@@ -20,64 +20,9 @@ spec:
       containers:
       - name: cheese
         image: haeun161/cheese:latest
-        env:
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: DB_HOST
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: DB_USER
-        - name: DB_PW
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: DB_PW
-        - name: DB_PORT
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: DB_PORT
-        - name: DB_NAME
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: DB_NAME
-        - name: SENS_SERVICE_ID
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: SENS_SERVICE_ID
-        - name: SENS_SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: SENS_SECRET_KEY
-        - name: SENS_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: SENS_ACCESS_KEY
-        - name: SENS_MYPHONENUM
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: SENS_MYPHONENUM
-        - name: jwtsecret
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key: jwtsecret
-        - name: OPENAI_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: cheese-secrets
-              key:  OPENAI_API_KEY
-
-
+        envFrom:
+        - secretRef:
+            name: cheese-secrets
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
