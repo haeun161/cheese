@@ -24,7 +24,7 @@ const schedule = require('node-schedule');
 //require('dotenv').config({path: "./config/gpt.env"}); // gpt.env 불러오기
 
 // 기본 설정
-const port = 5000,
+const port = process.env.PORT || 5000,
     express = require("express"),
     cors = require("cors")
     app = express(),
