@@ -1,8 +1,8 @@
-![image](https://github.com/haeun161/cheese/assets/80445078/c072d031-13e0-4f1a-a75d-d3d7c72075a4)# 🧀치즈 (치매 가디언즈)🧀 (Cheese-Guardians)
-2023 오픈소스 플랫폼 <b> 치즈: 치매가디언즈 </b>
+# 🧀치즈 (치매 가디언즈)🧀 (Cheese-Guardians)
+<b> 팀명 : 가디언즈</b>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/80445246/245830427-cdd7d976-233b-4f13-bf4c-a9599c9999d8.png" style="width:200px; height:200px">
- </p>
+</p>
 
 ## 📖목차
 1. [프로젝트 소개](#프로젝트-소개)
